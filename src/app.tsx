@@ -100,7 +100,7 @@ const srcData: BlockData = {
 function App() {
   return (
     <div>
-      <Button variant="bullet" />
+      <Button variant="bullet" active />
       <Divider />
       <Typography bold size="huge">
         Test

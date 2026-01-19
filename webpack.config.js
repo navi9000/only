@@ -1,6 +1,7 @@
 const path = require("path")
 const { ProvidePlugin } = require("webpack")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 module.exports = {
   entry: {
@@ -9,6 +10,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "js/index.js",
+    cssFilename: "css/index.css",
     clean: true,
   },
   plugins: [
@@ -16,6 +18,7 @@ module.exports = {
     new ProvidePlugin({
       React: "react",
     }),
+    new MiniCssExtractPlugin(),
   ],
   devServer: {
     static: {
@@ -40,15 +43,38 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.module\.scss$/i,
+        exclude: /node_modules/,
+        include: path.join(__dirname, "src"),
         use: [
-          "style-loader",
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
           {
             loader: "css-loader",
             options: {
               modules: {
                 namedExport: false,
+                exportLocalsConvention: "asIs",
+                localIdentName: "[name]__[local]___[hash:base64:5]",
               },
+            },
+          },
+          "sass-loader",
+        ],
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        exclude: [/node_modules/, /\.module\.scss$/i],
+        include: path.join(__dirname, "src"),
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: "css-loader",
+            options: {
+              modules: false,
             },
           },
           "sass-loader",
