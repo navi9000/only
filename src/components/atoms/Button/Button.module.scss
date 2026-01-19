@@ -1,0 +1,27 @@
+@use "../../../scssVariables.scss" as *;
+
+.button {
+  all: unset;
+  display: flex;
+  cursor: pointer;
+
+  &_variant {
+    &bullet {
+      height: 6px;
+      width: 6px;
+      border-radius: 50%;
+      opacity: 0.4;
+      transition: opacity 300ms;
+      background-color: var(--color-primary);
+
+      @media (min-width: $sm) {
+        opacity: 1;
+      }
+    }
+  }
+
+  &_active {
+    opacity: 1;
+    pointer-events: none;
+  }
+}

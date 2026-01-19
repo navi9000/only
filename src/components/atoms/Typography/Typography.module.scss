@@ -1,0 +1,66 @@
+@use "../../../scssVariables.scss" as *;
+
+.text {
+  &_color {
+    &primary {
+      color: var(--color-primary);
+    }
+    &blue {
+      color: var(--color-blue);
+    }
+    &pink {
+      color: var(--color-pink);
+    }
+  }
+
+  &_font {
+    &collapsed {
+      font-family: var(--font-secondary);
+      font-size: 16px;
+
+      @media (min-width: $lg) {
+        font-size: 25px;
+      }
+    }
+  }
+
+  &_size {
+    &normal {
+      font-size: 14px;
+      @media (min-width: $lg) {
+        font-size: 20px;
+      }
+    }
+    &large {
+      font-size: 20px;
+      @media (min-width: $lg) {
+        font-size: 56px;
+      }
+    }
+    &huge {
+      font-size: 56px;
+      @media (min-width: $lg) {
+        font-size: 200px;
+      }
+    }
+  }
+
+  &_bold {
+    font-weight: 700;
+  }
+
+  &_letterspacing {
+    &tight {
+      letter-spacing: -0.02em;
+    }
+  }
+
+  &_lineheight {
+    &medium {
+      line-height: 120%;
+    }
+    &tall {
+      line-height: 145%;
+    }
+  }
+}
