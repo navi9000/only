@@ -1,4 +1,4 @@
-import useBlockContext from "../../templates/Block/useBlockContext"
+import useBlockContext from "@/components/templates/Block/useBlockContext"
 
 export default function useDateScreen() {
   const { blockData, selectedPage, ANIMATION_DURATION_SEC } = useBlockContext()

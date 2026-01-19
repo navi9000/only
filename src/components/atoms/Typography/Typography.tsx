@@ -1,7 +1,7 @@
 import clsx from "clsx"
 import styles from "./Typography.module.scss"
 import type { FC, ReactNode } from "react"
-import { Resolve } from "../../../utils/types"
+import { Resolve } from "@/utils/types"
 
 interface CommonProps {
   children?: ReactNode

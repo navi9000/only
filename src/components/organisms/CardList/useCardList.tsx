@@ -3,9 +3,9 @@ import { useEffect, useState, type FC, type PropsWithChildren } from "react"
 import { useSwiper } from "swiper/react"
 import styles from "./CardList.module.scss"
 import type Swiper from "swiper"
-import useBlockContext from "../../templates/Block/useBlockContext"
-import arrowIcon from "../../../assets/forward_arrow_cards.svg"
-import Button from "../../atoms/Button/Button"
+import useBlockContext from "@/components/templates/Block/useBlockContext"
+import arrowIcon from "@/assets/forward_arrow_cards.svg"
+import Button from "@/components/atoms/Button/Button"
 
 const SwiperNavigation: FC<{ className?: string }> = ({ className }) => {
   const swiper = useSwiper()

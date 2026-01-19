@@ -1,16 +1,16 @@
 import { useRef, type FC } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
-import Card from "../../molecules/Card/Card"
+import Card from "@/components/molecules/Card/Card"
 import styles from "./CardList.module.scss"
 import "swiper/css"
-import { useIsLargeScreen } from "../../../utils/viewport"
+import { useIsLargeScreen } from "@/utils/viewport"
 import { Navigation, Pagination } from "swiper/modules"
 import useCardList from "./useCardList"
 import clsx from "clsx"
-import Divider from "../../atoms/Divider/Divider"
+import Divider from "@/components/atoms/Divider/Divider"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
-import type { Resolve } from "../../../utils/types"
+import type { Resolve } from "@/utils/types"
 
 type Props = {
   className?: string

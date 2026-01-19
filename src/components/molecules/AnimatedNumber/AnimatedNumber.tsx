@@ -1,8 +1,8 @@
 import { useRef, useState, type FC } from "react"
-import Typography from "../../atoms/Typography/Typography"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
-import { Resolve } from "../../../utils/types"
+import { Resolve } from "@/utils/types"
+import Typography from "@/components/atoms/Typography/Typography"
 
 type Props = {
   color: "blue" | "pink"

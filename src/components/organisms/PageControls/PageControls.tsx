@@ -1,11 +1,11 @@
 import type { FC } from "react"
 import clsx from "clsx"
 import usePageControls from "./usePageControls"
-import Button from "../../atoms/Button/Button"
+import Button from "@/components/atoms/Button/Button"
 import styles from "./PageControls.module.scss"
-import Typography from "../../atoms/Typography/Typography"
-import backArrowImg from "../../../assets/back_arrow_pages.svg"
-import type { Resolve } from "../../../utils/types"
+import Typography from "@/components/atoms/Typography/Typography"
+import backArrowImg from "@/assets/back_arrow_pages.svg"
+import type { Resolve } from "@/utils/types"
 
 type Props = {
   className?: string

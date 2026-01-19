@@ -1,4 +1,4 @@
-import useBlockContext from "../../templates/Block/useBlockContext"
+import useBlockContext from "@/components/templates/Block/useBlockContext"
 
 export default function usePageControls() {
   const { blockData, selectedPage, setSelectedPage, isLoading } =

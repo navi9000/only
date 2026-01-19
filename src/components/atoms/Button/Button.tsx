@@ -1,7 +1,7 @@
 import type { ComponentProps, FC } from "react"
 import styles from "./Button.module.scss"
 import clsx from "clsx"
-import { Resolve } from "../../../utils/types"
+import { Resolve } from "@/utils/types"
 
 interface Props extends ComponentProps<"button"> {
   variant: "bullet" | "icon"

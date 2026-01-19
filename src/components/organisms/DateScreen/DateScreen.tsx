@@ -1,11 +1,11 @@
 import { type FC } from "react"
 import styles from "./DateScreen.module.scss"
-import AnimatedNumber from "../../molecules/AnimatedNumber/AnimatedNumber"
+import AnimatedNumber from "@/components/molecules/AnimatedNumber/AnimatedNumber"
 import clsx from "clsx"
-import Typography from "../../atoms/Typography/Typography"
+import Typography from "@/components/atoms/Typography/Typography"
 import useDateScreen from "./useDateScreen"
-import PageControls from "../PageControls/PageControls"
-import type { Resolve } from "../../../utils/types"
+import type { Resolve } from "@/utils/types"
+import PageControls from "@/components/organisms/PageControls/PageControls"
 
 type Props = {
   className?: string
