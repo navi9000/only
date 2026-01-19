@@ -11,6 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "js/index.js",
     cssFilename: "css/index.css",
+    assetModuleFilename: "assets/[name][ext]",
     clean: true,
   },
   plugins: [
@@ -33,11 +34,19 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: "asset/resource",
         exclude: /node_modules/,
+        // generator: {
+        //   outputPath: "assets/img/",
+        //   filename: "[name][ext]",
+        // },
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: "asset/resource",
         exclude: /node_modules/,
+        // generator: {
+        //   outputPath: "assets/fonts/",
+        //   filename: "[name][ext]",
+        // },
       },
       {
         test: /\.tsx?$/,
