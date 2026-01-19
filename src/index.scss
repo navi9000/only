@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-primary: #42567a;
+  --color-blue: #3877ee;
+  --color-pink: #f178b6;
+  --color-divider: #c7cdd9;
+  --font-primary: "PT Sans", sans-serif;
+  --font-secondary: "Bebas Neue", sans-serif;
+}
+
+body {
+  min-width: 320px;
+}

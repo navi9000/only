@@ -2,6 +2,7 @@ import Button from "./components/atoms/Button/Button"
 import Divider from "./components/atoms/Divider/Divider"
 import Typography from "./components/atoms/Typography/Typography"
 import type { BlockData } from "./utils/types"
+import "./index.scss"
 
 const srcData: BlockData = {
   data: [
