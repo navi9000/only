@@ -1,0 +1,52 @@
+.datescreen {
+  height: 100%;
+  padding-block: 59px 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+
+  @media (min-width: $md) {
+    height: unset;
+  }
+  @media (min-width: $lg) {
+    padding-block: 170px 20px;
+    gap: 45px;
+  }
+}
+
+.title {
+  --datescreen-title-decoration-width: 0;
+  position: relative;
+  @media (min-width: $lg) {
+    --datescreen-title-decoration-width: 5px;
+    &::before {
+      position: absolute;
+      content: "";
+      height: 120px;
+      width: var(--datescreen-title-decoration-width);
+      left: calc(0px - var(--block-inline-padding));
+      top: 50%;
+      translate: 0 -50%;
+      background: linear-gradient(
+        to bottom,
+        var(--color-blue),
+        var(--color-pink)
+      );
+    }
+  }
+}
+
+.daterange {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+
+  @media (min-width: $lg) {
+    gap: 120px;
+  }
+}
+
+.controls {
+  justify-self: end;
+  margin-top: auto;
+}

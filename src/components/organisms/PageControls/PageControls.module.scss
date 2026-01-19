@@ -1,0 +1,57 @@
+.pagecontrols {
+  display: grid;
+  grid-template-columns: 1fr max-content 1fr;
+
+  &_disabled {
+    pointer-events: none;
+  }
+
+  @media (min-width: $lg) {
+    padding-top: 42px;
+    padding-bottom: 35px;
+  }
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  @media (min-width: $lg) {
+    gap: 20px;
+  }
+}
+
+.counter {
+  @media (min-width: $sm) {
+    font-size: 14px;
+  }
+}
+
+.arrows {
+  display: flex;
+  gap: 8px;
+  @media (min-width: $lg) {
+    gap: 20px;
+  }
+}
+
+.arrow {
+  width: 25px;
+  height: 25px;
+  &_forward {
+    transform: scale(-1, 1);
+  }
+  &_disabled {
+    opacity: 0.5;
+  }
+  @media (min-width: $lg) {
+    width: unset;
+    height: unset;
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  align-self: center;
+}

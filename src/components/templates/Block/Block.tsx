@@ -1,0 +1,19 @@
+import type { FC } from "react"
+import styles from "./Block.module.scss"
+import DateScreen from "../../organisms/DateScreen/DateScreen"
+import CardList from "../../organisms/CardList/CardList"
+import type { BlockData } from "../../../utils/types"
+import BlockContextProvider from "./BlockContextProvider"
+
+const Block: FC<BlockData> = ({ data }) => {
+  return (
+    <BlockContextProvider data={{ data }}>
+      <section className={styles.block}>
+        <DateScreen />
+        <CardList className={styles.cardlist} />
+      </section>
+    </BlockContextProvider>
+  )
+}
+
+export default Block

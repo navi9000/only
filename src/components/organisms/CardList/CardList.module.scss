@@ -1,0 +1,83 @@
+@mixin nav() {
+  background-image: url('data:image/svg+xml,<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="25" cy="25" r="24.5" transform="matrix(-1 0 0 1 50 2.18557e-06)" stroke="%2342567A" stroke-opacity="0.5" /><path d="M27.4999 18.75L21.2499 25L27.4999 31.25" stroke="%2342567A" stroke-width="2" /></svg>');
+  height: 50px;
+  width: 50px;
+}
+
+.cardlist {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.divider {
+  margin-inline: var(--block-inline-padding);
+}
+
+.swiper {
+  min-height: 200px;
+  position: relative;
+}
+
+.bullet {
+  display: inline-block;
+  height: 6px;
+  width: 6px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  opacity: 0.4;
+  margin-inline: 10px;
+
+  &_active {
+    opacity: 1;
+  }
+}
+
+.swipermask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100vw;
+  pointer-events: none;
+  z-index: 1;
+
+  &::before {
+    content: "";
+    position: absolute;
+    display: block;
+    height: inherit;
+    width: inherit;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 300ms;
+    background-color: white;
+    mask-image: linear-gradient(to right, #000, transparent 40%);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    display: block;
+    height: inherit;
+    width: inherit;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 300ms;
+    background-color: white;
+    mask-image: linear-gradient(to right, transparent 60%, #000);
+  }
+
+  &_start {
+    &::before {
+      opacity: 1;
+    }
+  }
+  &_end {
+    &::after {
+      opacity: 1;
+    }
+  }
+}

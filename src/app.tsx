@@ -1,10 +1,6 @@
-import Button from "./components/atoms/Button/Button"
-import Divider from "./components/atoms/Divider/Divider"
-import Typography from "./components/atoms/Typography/Typography"
 import type { BlockData } from "./utils/types"
 import "./index.scss"
-import AnimatedNumber from "./components/molecules/AnimatedNumber/AnimatedNumber"
-import Card from "./components/molecules/Card/Card"
+import Block from "./components/templates/Block/Block"
 
 const srcData: BlockData = {
   data: [
@@ -102,8 +98,7 @@ const srcData: BlockData = {
 function App() {
   return (
     <div>
-      <AnimatedNumber color="blue" value={2020} duration={2} />
-      <Card year={2020} text="Hello" />
+      <Block data={srcData.data} />
     </div>
   )
 }
