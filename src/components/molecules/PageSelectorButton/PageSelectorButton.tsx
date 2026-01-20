@@ -5,6 +5,7 @@ import { useRef, type ComponentProps, type FC, useState } from "react"
 import gsap from "gsap"
 import { ReactRef, useGSAP } from "@gsap/react"
 import { MotionPathPlugin } from "gsap/all"
+import { getStartAndEnd } from "@/utils/animations"
 
 type Props = {
   index: number
@@ -27,34 +28,6 @@ const activeStyles: GSAPTweenVars = {
 
 gsap.registerPlugin(MotionPathPlugin)
 
-function adapter(
-  index: number,
-  currIndex: number,
-  prevIndex: number,
-  numOfElements: number,
-) {
-  if (prevIndex > currIndex) {
-    return {
-      start: (currIndex + index) / numOfElements,
-      end: (prevIndex + index - numOfElements) / numOfElements,
-      newValue: currIndex,
-    }
-  }
-  if (currIndex + index > numOfElements) {
-    return {
-      start: (currIndex + index - numOfElements) / numOfElements,
-      end: (prevIndex + index - numOfElements) / numOfElements,
-      newValue: currIndex,
-    }
-  }
-
-  return {
-    start: (currIndex + index) / numOfElements,
-    end: (prevIndex + index) / numOfElements,
-    newValue: currIndex,
-  }
-}
-
 const PageSelectorButton: FC<Resolve<Props>> = ({
   activeIndex,
   index,
@@ -75,24 +48,24 @@ const PageSelectorButton: FC<Resolve<Props>> = ({
         })
       }
       if (isLargeScreen && buttonRef.current) {
-        const { start, end, newValue } = adapter(
+        const { start, end, newValue } = getStartAndEnd(
           index,
           activeIndex,
           prevActiveIndex,
           numberOfElements,
         )
-        console.log({ shapeRef, start, end, newValue })
+
         if (shapeRef.current) {
-          gsap.from(buttonRef.current, {
+          gsap.to(buttonRef.current, {
             duration: 1,
             motionPath: {
               path: MotionPathPlugin.convertToPath(
                 shapeRef.current.firstChild,
               )[0],
-              offsetX: -55 / 2 + -55 * index,
-              offsetY: -55 / 2,
-              start: start - 0.125,
-              end: end - 0.125,
+              offsetX: -55 / 2 + -55 * index - 0.5,
+              offsetY: -55 / 2 - 0.5,
+              start,
+              end,
             },
             onComplete: () => {
               setPrevActiveIndex(newValue)
