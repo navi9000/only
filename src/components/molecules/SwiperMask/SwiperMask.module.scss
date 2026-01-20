@@ -1,0 +1,48 @@
+.swipermask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100vw;
+  pointer-events: none;
+  z-index: 1;
+
+  &::before {
+    content: "";
+    position: absolute;
+    display: block;
+    height: inherit;
+    width: inherit;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 300ms;
+    background-color: white;
+    mask-image: linear-gradient(to right, #000, transparent 40%);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    display: block;
+    height: inherit;
+    width: inherit;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 300ms;
+    background-color: white;
+    mask-image: linear-gradient(to right, transparent 60%, #000);
+  }
+
+  &_start {
+    &::before {
+      opacity: 1;
+    }
+  }
+  &_end {
+    &::after {
+      opacity: 1;
+    }
+  }
+}

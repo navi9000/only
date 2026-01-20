@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import type { BlockData } from "../../../utils/types"
+import type { BlockData } from "@/utils/types"
 
 type BlockContextData = {
   blockData: BlockData

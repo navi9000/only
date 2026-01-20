@@ -1,5 +1,5 @@
 import { useEffect, useState, type FC, type PropsWithChildren } from "react"
-import type { BlockData } from "../../../utils/types"
+import type { BlockData } from "@/utils/types"
 import BlockContext from "./BlockContext"
 
 const BlockContextProvider: FC<PropsWithChildren<{ data: BlockData }>> = ({

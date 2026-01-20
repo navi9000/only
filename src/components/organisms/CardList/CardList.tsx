@@ -11,6 +11,7 @@ import Divider from "@/components/atoms/Divider/Divider"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 import type { Resolve } from "@/utils/types"
+import SwiperMask from "@/components/molecules/SwiperMask/SwiperMask"
 
 type Props = {
   className?: string
@@ -18,7 +19,7 @@ type Props = {
 
 const CardList: FC<Resolve<Props>> = ({ className }) => {
   const isLargeScreen = useIsLargeScreen()
-  const { SwiperNavigation, SwiperMask, list, isLoading } = useCardList()
+  const { list, isLoading } = useCardList()
   const ref = useRef<HTMLDivElement>(null)
 
   useGSAP(
@@ -59,7 +60,7 @@ const CardList: FC<Resolve<Props>> = ({ className }) => {
               <Card {...card} />
             </SwiperSlide>
           ))}
-          {isLargeScreen === false && <SwiperMask />}
+          {!isLargeScreen && <SwiperMask />}
 
           {/* {isLargeScreen && <SwiperNavigation />} */}
         </Swiper>

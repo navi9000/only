@@ -1,6 +1,6 @@
-import type { BlockData } from "./utils/types"
+import Block from "@/components/templates/Block/Block"
+import type { BlockData } from "@/utils/types"
 import "./index.scss"
-import Block from "./components/templates/Block/Block"
 
 const srcData: BlockData = {
   data: [

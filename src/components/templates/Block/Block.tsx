@@ -1,8 +1,8 @@
 import type { FC } from "react"
 import styles from "./Block.module.scss"
-import DateScreen from "../../organisms/DateScreen/DateScreen"
-import CardList from "../../organisms/CardList/CardList"
-import type { BlockData } from "../../../utils/types"
+import DateScreen from "@/components/organisms/DateScreen/DateScreen"
+import CardList from "@/components/organisms/CardList/CardList"
+import type { BlockData } from "@/utils/types"
 import BlockContextProvider from "./BlockContextProvider"
 
 const Block: FC<BlockData> = ({ data }) => {

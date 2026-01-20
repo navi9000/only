@@ -8,8 +8,6 @@ interface Props extends ComponentProps<"button"> {
   active?: boolean
 }
 
-console.log({ styles })
-
 const Button: FC<Resolve<Props>> = ({
   className,
   children,

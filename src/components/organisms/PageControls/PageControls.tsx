@@ -62,10 +62,7 @@ const PageControls: FC<Resolve<Props>> = ({ className }) => {
             key={index}
             variant="bullet"
             active={isActive(index)}
-            onClick={() => {
-              console.log("clicked", { index })
-              setActive(index)
-            }}
+            onClick={() => setActive(index)}
           />
         ))}
       </div>
