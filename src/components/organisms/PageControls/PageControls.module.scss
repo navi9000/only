@@ -43,13 +43,10 @@
 
 .circle {
   --circle-container-side: 530px;
+  --circle-translate: calc(-0.5 * (var(--circle-container-side)));
   position: absolute;
-  // left: 50%;
-  // top: 214px;
-  // translate: -50% 0;
-  left: var(--block-horizontal-line-pos);
-  top: var(--block-vertical-line-pos);
-  // translate: -50% -50%;
-  translate: calc(-0.5 * (var(--circle-container-side)))
-    calc(-0.5 * (var(--circle-container-side)));
+  left: var(--block-vertical-line-placement);
+  top: var(--block-horizontal-line-placement);
+  translate: var(--circle-translate) var(--circle-translate);
+  pointer-events: none;
 }

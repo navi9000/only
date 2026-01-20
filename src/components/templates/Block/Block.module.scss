@@ -6,8 +6,8 @@
   position: relative;
 
   @media (min-width: $md) {
-    --block-horizontal-line-pos: 50%;
-    --block-vertical-line-pos: 479px;
+    --block-vertical-line-placement: 50%;
+    --block-horizontal-line-placement: 479px;
 
     height: unset;
     width: 1440px;
@@ -17,15 +17,15 @@
     background:
       linear-gradient(
         to left,
-        transparent var(--block-horizontal-line-pos),
-        var(--color-divider) var(--block-horizontal-line-pos),
-        transparent calc(var(--block-horizontal-line-pos) + 1px)
+        transparent var(--block-vertical-line-placement),
+        var(--color-divider),
+        transparent calc(var(--block-vertical-line-placement) + 1px)
       ),
       linear-gradient(
         to bottom,
-        transparent var(--block-vertical-line-pos),
-        var(--color-divider) var(--block-vertical-line-pos),
-        transparent calc(var(--block-vertical-line-pos) + 1px)
+        transparent var(--block-horizontal-line-placement),
+        var(--color-divider),
+        transparent calc(var(--block-horizontal-line-placement) + 1px)
       );
   }
 
