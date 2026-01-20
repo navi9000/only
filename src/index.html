@@ -1,9 +1,52 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
   <head>
+    <link
+      rel="preload"
+      href="assets/PTSans-Regular.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="assets/PTSans-Bold.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="assets/BebasNeue-Regular.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Only</title>
+    <style>
+      @font-face {
+        font-family: "PT Sans";
+        src: url("assets/PTSans-Regular.ttf");
+        font-weight: 400;
+      }
+
+      @font-face {
+        font-family: "PT Sans";
+        src: url("assets/PTSans-Bold.ttf");
+        font-weight: 700;
+      }
+
+      @font-face {
+        font-family: "Bebas Neue";
+        src: url("assets/BebasNeue-Regular.ttf");
+        font-weight: 700;
+      }
+      body {
+        font-family: "PT Sans", sans-serif;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
