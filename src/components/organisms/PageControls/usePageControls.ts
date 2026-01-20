@@ -3,7 +3,7 @@ import useBlockContext from "@/components/templates/Block/useBlockContext"
 export default function usePageControls() {
   const { blockData, selectedPage, setSelectedPage, isLoading } =
     useBlockContext()
-  const length = blockData.data[selectedPage].list.length
+  const length = blockData.data.length
   return {
     length,
     activeIndex: selectedPage,
