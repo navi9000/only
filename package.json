@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "build": "webpack",
-    "dev": "webpack serve --mode=development --watch-options-poll"
+    "dev": "webpack serve --mode=development --watch-options-poll",
+    "analyze": "webpack-bundle-analyzer --port 4200 dist/stats.json"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +21,7 @@
     "ts-loader": "^9.5.4",
     "typescript": "^5.9.3",
     "webpack": "^5.104.1",
+    "webpack-bundle-analyzer": "^5.1.1",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.3"
   },

@@ -2,15 +2,16 @@ const path = require("path")
 const { ProvidePlugin } = require("webpack")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer")
 
 module.exports = {
   entry: {
-    home: "./src/main.tsx",
+    index: "./src/main.tsx",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "js/index.js",
-    cssFilename: "css/index.css",
+    filename: "js/[name].[contenthash].js",
+    chunkFilename: "js/[name].[contenthash].js",
     assetModuleFilename: "assets/[name][ext]",
     clean: true,
   },
@@ -19,7 +20,12 @@ module.exports = {
     new ProvidePlugin({
       React: "react",
     }),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({ filename: "css/[name].[contenthash].css" }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: "disabled",
+      generateStatsFile: true,
+      statsOptions: { source: false },
+    }),
   ],
   devServer: {
     static: {
@@ -110,4 +116,18 @@ module.exports = {
       "@/*": path.resolve(process.cwd(), "./src/*"),
     },
   },
+  optimization: {
+    usedExports: true,
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all",
+        },
+      },
+    },
+    minimize: true,
+  },
+  mode: "production",
 }
