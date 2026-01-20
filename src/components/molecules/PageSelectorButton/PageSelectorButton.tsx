@@ -1,7 +1,7 @@
 import Button from "@/components/atoms/Button/Button"
 import { Resolve } from "@/utils/types"
 import { useIsLargeScreen } from "@/utils/viewport"
-import { type Ref, useRef, type ComponentProps, type FC } from "react"
+import { useRef, type ComponentProps, type FC, useState } from "react"
 import gsap from "gsap"
 import { ReactRef, useGSAP } from "@gsap/react"
 import { MotionPathPlugin } from "gsap/all"
@@ -16,26 +16,54 @@ type Props = {
 const initialStyles: GSAPTweenVars = {
   backgroundColor: "var(--color-primary)",
   borderColor: "transparent",
-  height: "8px",
-  width: "8px",
+  scale: 1 / 7,
 }
 
 const activeStyles: GSAPTweenVars = {
   backgroundColor: "white",
   borderColor: "var(--color-primary)",
-  height: "56px",
-  width: "56px",
+  scale: 1,
 }
 
 gsap.registerPlugin(MotionPathPlugin)
+
+function adapter(
+  index: number,
+  currIndex: number,
+  prevIndex: number,
+  numOfElements: number,
+) {
+  if (prevIndex > currIndex) {
+    return {
+      start: (currIndex + index) / numOfElements,
+      end: (prevIndex + index - numOfElements) / numOfElements,
+      newValue: currIndex,
+    }
+  }
+  if (currIndex + index > numOfElements) {
+    return {
+      start: (currIndex + index - numOfElements) / numOfElements,
+      end: (prevIndex + index - numOfElements) / numOfElements,
+      newValue: currIndex,
+    }
+  }
+
+  return {
+    start: (currIndex + index) / numOfElements,
+    end: (prevIndex + index) / numOfElements,
+    newValue: currIndex,
+  }
+}
 
 const PageSelectorButton: FC<Resolve<Props>> = ({
   activeIndex,
   index,
   shapeRef,
+  numberOfElements,
   ...rest
 }) => {
-  const active = activeIndex === index
+  const isActive = activeIndex === index
+  const [prevActiveIndex, setPrevActiveIndex] = useState(activeIndex)
   const buttonRef = useRef<HTMLButtonElement>(null)
   const isLargeScreen = useIsLargeScreen()
   const { contextSafe } = useGSAP(
@@ -47,7 +75,32 @@ const PageSelectorButton: FC<Resolve<Props>> = ({
         })
       }
       if (isLargeScreen && buttonRef.current) {
-        if (active) {
+        const { start, end, newValue } = adapter(
+          index,
+          activeIndex,
+          prevActiveIndex,
+          numberOfElements,
+        )
+        console.log({ shapeRef, start, end, newValue })
+        if (shapeRef.current) {
+          gsap.from(buttonRef.current, {
+            duration: 1,
+            motionPath: {
+              path: MotionPathPlugin.convertToPath(
+                shapeRef.current.firstChild,
+              )[0],
+              offsetX: -58 / 2,
+              offsetY: -58 / 2 + -58 * index,
+              start: start - 0.125,
+              end: end - 0.125,
+            },
+            onComplete: () => {
+              setPrevActiveIndex(newValue)
+            },
+          })
+        }
+
+        if (isActive) {
           gsap.to(buttonRef.current, {
             ...activeStyles,
             duration: 0,
@@ -61,7 +114,13 @@ const PageSelectorButton: FC<Resolve<Props>> = ({
     },
     {
       scope: shapeRef,
-      dependencies: [active, index, isLargeScreen],
+      dependencies: [
+        isActive,
+        index,
+        isLargeScreen,
+        prevActiveIndex,
+        activeIndex,
+      ],
     },
   )
 
@@ -75,7 +134,7 @@ const PageSelectorButton: FC<Resolve<Props>> = ({
   })
 
   const onMouseLeave = contextSafe(() => {
-    if (buttonRef.current && isLargeScreen && !active) {
+    if (buttonRef.current && isLargeScreen && !isActive) {
       gsap.to(buttonRef.current, {
         ...initialStyles,
         ease: "power2.out",
@@ -89,7 +148,7 @@ const PageSelectorButton: FC<Resolve<Props>> = ({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       variant="bullet"
-      active={active}
+      active={isActive}
       {...rest}
     >
       {index + 1}

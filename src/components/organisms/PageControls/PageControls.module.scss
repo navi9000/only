@@ -39,11 +39,22 @@
   display: flex;
   gap: 8px;
   align-self: center;
+  @media (min-width: $md) {
+    display: block;
+    position: absolute;
+    gap: unset;
+    align-self: unset;
+    top: var(--block-horizontal-line-placement);
+    left: var(--block-vertical-line-placement);
+    translate: var(--circle-translate) var(--circle-translate);
+
+    // & > * {
+    //   position: absolute;
+    // }
+  }
 }
 
 .circle {
-  --circle-container-side: 530px;
-  --circle-translate: calc(-0.5 * (var(--circle-container-side)));
   position: absolute;
   left: var(--block-vertical-line-placement);
   top: var(--block-horizontal-line-placement);

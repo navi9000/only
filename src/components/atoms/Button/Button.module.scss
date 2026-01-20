@@ -20,6 +20,9 @@
 
       @media (min-width: $sm) {
         opacity: 1;
+        transform-origin: center center;
+        height: 56px;
+        width: 56px;
       }
     }
   }
