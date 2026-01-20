@@ -4,8 +4,8 @@ import usePageControls from "./usePageControls"
 import Button from "@/components/atoms/Button/Button"
 import styles from "./PageControls.module.scss"
 import Typography from "@/components/atoms/Typography/Typography"
-import backArrowImg from "@/assets/back_arrow_pages.svg"
 import type { Resolve } from "@/utils/types"
+import PageNavigationButton from "@/components/molecules/PageNavigationButton/PageNavigationButton"
 
 type Props = {
   className?: string
@@ -36,24 +36,16 @@ const PageControls: FC<Resolve<Props>> = ({ className }) => {
           0{readableIndex}/0{length}
         </Typography>
         <div className={styles.arrows}>
-          <Button variant="icon" disabled={isFirst} onClick={setPrev}>
-            <img
-              className={clsx(styles.arrow, {
-                [styles.arrow_disabled]: isFirst,
-              })}
-              src={backArrowImg}
-              alt="back"
-            />
-          </Button>
-          <Button variant="icon" disabled={isLast} onClick={setNext}>
-            <img
-              className={clsx(styles.arrow, styles.arrow_forward, {
-                [styles.arrow_disabled]: isLast,
-              })}
-              src={backArrowImg}
-              alt="forward"
-            />
-          </Button>
+          <PageNavigationButton
+            direction="backward"
+            disabled={isFirst}
+            onClick={setPrev}
+          />
+          <PageNavigationButton
+            direction="forward"
+            disabled={isLast}
+            onClick={setNext}
+          />
         </div>
       </div>
       <div className={styles.buttons}>
