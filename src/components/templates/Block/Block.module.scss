@@ -1,8 +1,8 @@
 .block {
-  --block-inline-padding: 20px;
+  --block-padding-inline: 20px;
   width: 100%;
   height: 568px;
-  padding-inline: var(--block-inline-padding);
+  padding-inline: var(--block-padding-inline);
   position: relative;
 
   @media (min-width: $md) {
@@ -30,7 +30,7 @@
   }
 
   @media (min-width: $lg) {
-    --block-inline-padding: 80px;
+    --block-padding-inline: 80px;
     height: unset;
     margin-left: 320px;
   }
