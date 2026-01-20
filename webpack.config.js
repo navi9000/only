@@ -18,7 +18,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
-      // preload: "*.ttf",
+      preload: "*.ttf",
     }),
     new ProvidePlugin({
       React: "react",
