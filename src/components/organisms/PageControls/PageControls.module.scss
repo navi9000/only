@@ -40,7 +40,7 @@
   gap: 8px;
   align-self: center;
   @media (min-width: $md) {
-    display: block;
+    // display: block;
     position: absolute;
     gap: unset;
     align-self: unset;

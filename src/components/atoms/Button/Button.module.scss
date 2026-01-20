@@ -1,5 +1,7 @@
 .button {
   all: unset;
+  box-sizing: inherit;
+  font-family: inherit;
   display: flex;
   justify-content: center;
   align-items: center;

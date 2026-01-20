@@ -89,8 +89,8 @@ const PageSelectorButton: FC<Resolve<Props>> = ({
               path: MotionPathPlugin.convertToPath(
                 shapeRef.current.firstChild,
               )[0],
-              offsetX: -58 / 2,
-              offsetY: -58 / 2 + -58 * index,
+              offsetX: -55 / 2 + -55 * index,
+              offsetY: -55 / 2,
               start: start - 0.125,
               end: end - 0.125,
             },
