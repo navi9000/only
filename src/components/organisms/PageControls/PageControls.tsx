@@ -1,11 +1,11 @@
 import type { FC } from "react"
 import clsx from "clsx"
 import usePageControls from "./usePageControls"
-import Button from "@/components/atoms/Button/Button"
 import styles from "./PageControls.module.scss"
 import Typography from "@/components/atoms/Typography/Typography"
 import type { Resolve } from "@/utils/types"
 import PageNavigationButton from "@/components/molecules/PageNavigationButton/PageNavigationButton"
+import PageSelectorButton from "@/components/molecules/PageSelectorButton/PageSelectorButton"
 
 type Props = {
   className?: string
@@ -50,9 +50,9 @@ const PageControls: FC<Resolve<Props>> = ({ className }) => {
       </div>
       <div className={styles.buttons}>
         {Array.from({ length }, (_, index) => (
-          <Button
+          <PageSelectorButton
             key={index}
-            variant="bullet"
+            index={index}
             active={isActive(index)}
             onClick={() => setActive(index)}
           />

@@ -1,16 +1,22 @@
 .button {
   all: unset;
   display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
 
   &_variant {
     &bullet {
-      height: 6px;
-      width: 6px;
+      height: 8px;
+      width: 8px;
       border-radius: 50%;
       opacity: 0.4;
       transition: opacity 300ms;
       background-color: var(--color-primary);
+      color: var(--color-primary);
+      border: 1px solid transparent;
+      font-size: 20px;
+      overflow: hidden;
 
       @media (min-width: $sm) {
         opacity: 1;
