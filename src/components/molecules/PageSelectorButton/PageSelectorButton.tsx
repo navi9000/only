@@ -1,11 +1,17 @@
 import Button from "@/components/atoms/Button/Button"
 import { Resolve } from "@/utils/types"
 import { useIsLargeScreen } from "@/utils/viewport"
-import { useRef, type ComponentProps, type FC } from "react"
+import { type Ref, useRef, type ComponentProps, type FC } from "react"
 import gsap from "gsap"
-import { useGSAP } from "@gsap/react"
+import { ReactRef, useGSAP } from "@gsap/react"
+import { MotionPathPlugin } from "gsap/all"
 
-type Props = { active?: boolean; index: number } & ComponentProps<"button">
+type Props = {
+  index: number
+  numberOfElements: number
+  activeIndex: number
+  shapeRef?: ReactRef
+} & ComponentProps<"button">
 
 const initialStyles: GSAPTweenVars = {
   backgroundColor: "var(--color-primary)",
@@ -21,7 +27,15 @@ const activeStyles: GSAPTweenVars = {
   width: "56px",
 }
 
-const PageSelectorButton: FC<Resolve<Props>> = ({ active, index, ...rest }) => {
+gsap.registerPlugin(MotionPathPlugin)
+
+const PageSelectorButton: FC<Resolve<Props>> = ({
+  activeIndex,
+  index,
+  shapeRef,
+  ...rest
+}) => {
+  const active = activeIndex === index
   const buttonRef = useRef<HTMLButtonElement>(null)
   const isLargeScreen = useIsLargeScreen()
   const { contextSafe } = useGSAP(
@@ -46,6 +60,7 @@ const PageSelectorButton: FC<Resolve<Props>> = ({ active, index, ...rest }) => {
       }
     },
     {
+      scope: shapeRef,
       dependencies: [active, index, isLargeScreen],
     },
   )

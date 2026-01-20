@@ -19,7 +19,7 @@ const PageControls: FC<Resolve<Props>> = ({ className }) => {
   const {
     humanStyleIndex,
     length,
-    isActive,
+    activeIndex,
     setActive,
     isFirst,
     isLast,
@@ -63,8 +63,10 @@ const PageControls: FC<Resolve<Props>> = ({ className }) => {
           <PageSelectorButton
             key={index}
             index={index}
-            active={isActive(index)}
+            numberOfElements={length}
+            activeIndex={activeIndex}
             onClick={() => setActive(index)}
+            shapeRef={shapeRef}
           />
         ))}
       </div>

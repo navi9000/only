@@ -6,7 +6,7 @@ export default function usePageControls() {
   const length = blockData.data[selectedPage].list.length
   return {
     length,
-    isActive: (index: number) => index === selectedPage,
+    activeIndex: selectedPage,
     setActive: setSelectedPage,
     isFirst: selectedPage === 0,
     isLast: selectedPage === length - 1,
