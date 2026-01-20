@@ -1,4 +1,4 @@
-import type { FC } from "react"
+import { lazy, useRef, type FC } from "react"
 import clsx from "clsx"
 import usePageControls from "./usePageControls"
 import styles from "./PageControls.module.scss"
@@ -6,6 +6,10 @@ import Typography from "@/components/atoms/Typography/Typography"
 import type { Resolve } from "@/utils/types"
 import PageNavigationButton from "@/components/molecules/PageNavigationButton/PageNavigationButton"
 import PageSelectorButton from "@/components/molecules/PageSelectorButton/PageSelectorButton"
+import { useIsLargeScreen } from "@/utils/viewport"
+const CircleShape = lazy(
+  () => import("@/components/atoms/CircleShape/CircleShape"),
+)
 
 type Props = {
   className?: string
@@ -13,7 +17,7 @@ type Props = {
 
 const PageControls: FC<Resolve<Props>> = ({ className }) => {
   const {
-    readableIndex,
+    humanStyleIndex,
     length,
     isActive,
     setActive,
@@ -23,6 +27,9 @@ const PageControls: FC<Resolve<Props>> = ({ className }) => {
     setNext,
     isLoading,
   } = usePageControls()
+  const isLargeScreen = useIsLargeScreen()
+  const shapeRef = useRef<SVGSVGElement>(null)
+
   return (
     <div
       className={clsx(
@@ -33,7 +40,7 @@ const PageControls: FC<Resolve<Props>> = ({ className }) => {
     >
       <div className={styles.navigation}>
         <Typography className={styles.counter}>
-          0{readableIndex}/0{length}
+          0{humanStyleIndex}/0{length}
         </Typography>
         <div className={styles.arrows}>
           <PageNavigationButton
@@ -48,6 +55,9 @@ const PageControls: FC<Resolve<Props>> = ({ className }) => {
           />
         </div>
       </div>
+      {isLargeScreen && (
+        <CircleShape ref={shapeRef} className={styles.circle} />
+      )}
       <div className={styles.buttons}>
         {Array.from({ length }, (_, index) => (
           <PageSelectorButton

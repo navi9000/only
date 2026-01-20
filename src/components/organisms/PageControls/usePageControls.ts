@@ -12,7 +12,7 @@ export default function usePageControls() {
     isLast: selectedPage === length - 1,
     setPrev: () => setSelectedPage(selectedPage - 1),
     setNext: () => setSelectedPage(selectedPage + 1),
-    readableIndex: selectedPage + 1,
+    humanStyleIndex: selectedPage + 1,
     isLoading,
   }
 }

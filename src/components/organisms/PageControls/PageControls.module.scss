@@ -35,23 +35,21 @@
   }
 }
 
-.arrow {
-  width: 25px;
-  height: 25px;
-  &_forward {
-    transform: scale(-1, 1);
-  }
-  &_disabled {
-    opacity: 0.5;
-  }
-  @media (min-width: $lg) {
-    width: unset;
-    height: unset;
-  }
-}
-
 .buttons {
   display: flex;
   gap: 8px;
   align-self: center;
+}
+
+.circle {
+  --circle-container-side: 530px;
+  position: absolute;
+  // left: 50%;
+  // top: 214px;
+  // translate: -50% 0;
+  left: var(--block-horizontal-line-pos);
+  top: var(--block-vertical-line-pos);
+  // translate: -50% -50%;
+  translate: calc(-0.5 * (var(--circle-container-side)))
+    calc(-0.5 * (var(--circle-container-side)));
 }
