@@ -11,7 +11,7 @@ gsap.registerPlugin(MotionPathPlugin)
 const initialStyles: GSAPTweenVars = {
   backgroundColor: "var(--color-primary)",
   borderColor: "transparent",
-  scale: 1 / 7,
+  scale: 1 / 8,
 }
 
 const activeStyles: GSAPTweenVars = {
@@ -38,7 +38,10 @@ function withAnimation(
 
     const { contextSafe } = useGSAP(
       () => {
-        if (buttonRef.current) {
+        if (buttonRef.current && shapeRef.current) {
+          const path = MotionPathPlugin.convertToPath(
+            shapeRef.current.firstChild,
+          )[0]
           const { start, end, newValue } = getStartAndEnd(
             index,
             activeIndex,
@@ -46,23 +49,19 @@ function withAnimation(
             numberOfElements,
           )
 
-          if (shapeRef.current) {
-            gsap.to(buttonRef.current, {
-              duration,
-              motionPath: {
-                path: MotionPathPlugin.convertToPath(
-                  shapeRef.current.firstChild,
-                )[0],
-                offsetX: -55 / 2 + -55 * index - 0.5,
-                offsetY: -55 / 2 - 0.5,
-                start,
-                end,
-              },
-              onComplete: () => {
-                setPrevActiveIndex(newValue)
-              },
-            })
-          }
+          gsap.to(buttonRef.current, {
+            duration,
+            motionPath: {
+              path,
+              offsetX: -55 / 2 + -55 * index - 0.5,
+              offsetY: -55 / 2 - 0.5,
+              start,
+              end,
+            },
+            onComplete: () => {
+              setPrevActiveIndex(newValue)
+            },
+          })
 
           if (isActive) {
             gsap.to(buttonRef.current, {
