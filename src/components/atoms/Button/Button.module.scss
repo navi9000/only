@@ -20,7 +20,7 @@
       font-size: 20px;
       overflow: hidden;
 
-      @media (min-width: $sm) {
+      @media (min-width: $md) {
         opacity: 1;
         transform-origin: center center;
         height: 56px;

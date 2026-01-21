@@ -6,14 +6,28 @@
   transition: opacity 300ms;
   z-index: 1;
   position: absolute;
-  top: 26px;
+  scale: 0.7;
+  top: 0;
+
+  @media (min-width: $lg) {
+    scale: 1;
+    top: 26px;
+  }
+
   &_backward {
-    scale: -1 1;
-    left: 24px;
+    scale: -0.7 0.7;
+    left: 0;
+    @media (min-width: $lg) {
+      scale: -1 1;
+      left: 24px;
+    }
   }
 
   &_forward {
-    right: 24px;
+    right: 0;
+    @media (min-width: $lg) {
+      right: 24px;
+    }
   }
 
   &_hidden {

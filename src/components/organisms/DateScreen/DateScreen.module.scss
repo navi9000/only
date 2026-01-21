@@ -7,6 +7,7 @@
 
   @media (min-width: $md) {
     height: unset;
+    gap: 110px;
   }
   @media (min-width: $lg) {
     padding-block: 170px 20px;
@@ -17,12 +18,12 @@
 .title {
   --datescreen-title-decoration-width: 0;
   position: relative;
-  @media (min-width: $lg) {
+  @media (min-width: $md) {
     --datescreen-title-decoration-width: 5px;
     &::before {
       position: absolute;
       content: "";
-      height: 120px;
+      height: 80px;
       width: var(--datescreen-title-decoration-width);
       left: calc(0px - var(--block-padding-inline));
       top: 50%;
@@ -33,6 +34,9 @@
         var(--color-pink)
       );
     }
+  }
+  @media (min-width: $lg) {
+    height: 120px;
   }
 }
 

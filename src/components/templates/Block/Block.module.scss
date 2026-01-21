@@ -5,14 +5,20 @@
   padding-inline: var(--block-padding-inline);
   position: relative;
 
+  @media (min-width: $sm) {
+    height: 612px;
+  }
+
   @media (min-width: $md) {
     --block-vertical-line-placement: 50%;
-    --block-horizontal-line-placement: 479px;
+    --block-horizontal-line-placement: 350px;
     --circle-container-side: 530px;
     --circle-translate: calc(-0.5 * (var(--circle-container-side)));
 
-    height: 1080px;
-    width: 1440px;
+    --block-padding-inline: 40px;
+    height: 800px;
+    width: 900px;
+
     border: 1px solid var(--color-divider);
     background:
       linear-gradient(
@@ -31,7 +37,10 @@
 
   @media (min-width: $lg) {
     --block-padding-inline: 80px;
+    --block-horizontal-line-placement: 479px;
+
     height: 1080px;
+    width: 1440px;
     margin-left: 320px;
   }
 
@@ -41,7 +50,14 @@
     top: 292px;
     left: 0;
 
+    @media (min-width: $sm) {
+      top: 348px;
+    }
+
     @media (min-width: $md) {
+      top: 624px;
+    }
+    @media (min-width: $lg) {
       top: 840px;
     }
   }

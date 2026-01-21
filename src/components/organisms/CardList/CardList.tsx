@@ -53,6 +53,24 @@ const CardList: FC<Resolve<Props>> = ({ className }) => {
               slidesOffsetBefore: 20,
               spaceBetween: 8,
             },
+            [480]: {
+              slidesPerView: 1.5,
+              slidesOffsetAfter: 20,
+              slidesOffsetBefore: 20,
+              spaceBetween: 16,
+            },
+            [768]: {
+              slidesPerView: 2.5,
+              slidesOffsetAfter: 20,
+              slidesOffsetBefore: 20,
+              spaceBetween: 16,
+            },
+            [900]: {
+              slidesPerView: 2,
+              slidesOffsetAfter: 40,
+              slidesOffsetBefore: 40,
+              spaceBetween: 40,
+            },
             [1440]: {
               slidesPerView: 3,
               spaceBetween: 80,

@@ -16,6 +16,14 @@
       font-family: var(--font-secondary);
       font-size: 16px;
 
+      @media (min-width: $sm) {
+        font-size: 18px;
+      }
+
+      @media (min-width: $md) {
+        font-size: 22px;
+      }
+
       @media (min-width: $lg) {
         font-size: 25px;
       }
@@ -25,18 +33,36 @@
   &_size {
     &normal {
       font-size: 14px;
+      @media (min-width: $sm) {
+        font-size: 16px;
+      }
+      @media (min-width: $md) {
+        font-size: 18px;
+      }
       @media (min-width: $lg) {
         font-size: 20px;
       }
     }
     &large {
       font-size: 20px;
+      @media (min-width: $sm) {
+        font-size: 28px;
+      }
+      @media (min-width: $md) {
+        font-size: 36px;
+      }
       @media (min-width: $lg) {
         font-size: 56px;
       }
     }
     &huge {
       font-size: 56px;
+      @media (min-width: $sm) {
+        font-size: 80px;
+      }
+      @media (min-width: $md) {
+        font-size: 140px;
+      }
       @media (min-width: $lg) {
         font-size: 200px;
       }

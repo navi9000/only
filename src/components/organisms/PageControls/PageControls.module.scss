@@ -40,17 +40,12 @@
   gap: 8px;
   align-self: center;
   @media (min-width: $md) {
-    // display: block;
     position: absolute;
     gap: unset;
     align-self: unset;
     top: var(--block-horizontal-line-placement);
     left: var(--block-vertical-line-placement);
     translate: var(--circle-translate) var(--circle-translate);
-
-    // & > * {
-    //   position: absolute;
-    // }
   }
 }
 
@@ -60,4 +55,6 @@
   top: var(--block-horizontal-line-placement);
   translate: var(--circle-translate) var(--circle-translate);
   pointer-events: none;
+  height: var(--circle-container-side);
+  width: var(--circle-container-side);
 }

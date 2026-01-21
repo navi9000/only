@@ -46,6 +46,7 @@ const PageSelectorButton: FC<Resolve<Props>> = ({
       if (!isLargeScreen && buttonRef.current) {
         gsap.to(buttonRef.current, {
           ...initialStyles,
+          scale: 1,
           duration: 0,
         })
       }
