@@ -6,6 +6,9 @@ import type { BlockData } from "@/utils/types"
 import BlockContextProvider from "./BlockContextProvider"
 
 const Block: FC<BlockData> = ({ data }) => {
+  if (data.length < 2 || data.length > 6) {
+    return <div>Допустимое число элементов: от 2 до 6</div>
+  }
   return (
     <BlockContextProvider data={{ data }}>
       <section className={styles.blockcontainer}>
