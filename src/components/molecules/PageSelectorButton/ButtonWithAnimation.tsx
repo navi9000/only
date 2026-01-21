@@ -37,42 +37,35 @@ function withAnimation(
     const contextRef = useRef<HTMLDivElement>(null)
     const isFirstRender = prevActiveIndex == activeIndex
 
-    const { contextSafe } = useGSAP(
-      () => {
-        if (buttonRef.current && shapeRef.current) {
-          const path = MotionPathPlugin.convertToPath(
-            shapeRef.current.firstChild,
-          )[0]
-          const coords = buttonWithAnimationCoords({
-            index,
-            prevActiveIndex,
-            activeIndex,
-            numberOfElements,
-          })
+    const { contextSafe } = useGSAP({
+      scope: contextRef,
+      dependencies: [isActive],
+    })
 
-          gsap.to(buttonRef.current, {
-            duration,
-            motionPath: {
-              path,
-              ...coords,
-            },
-            onComplete: () => {
-              setPrevActiveIndex(activeIndex)
-            },
-          })
-        }
-      },
-      {
-        scope: contextRef,
-        dependencies: [
+    useGSAP(() => {
+      if (buttonRef.current && shapeRef.current) {
+        const path = MotionPathPlugin.convertToPath(
+          shapeRef.current.firstChild,
+        )[0]
+        const coords = buttonWithAnimationCoords({
           index,
           prevActiveIndex,
           activeIndex,
-          duration,
           numberOfElements,
-        ],
-      },
-    )
+        })
+
+        gsap.to(buttonRef.current, {
+          duration,
+          motionPath: {
+            path,
+            ...coords,
+          },
+          onComplete: () => {
+            setPrevActiveIndex(activeIndex)
+          },
+        })
+      }
+    }, [index, prevActiveIndex, activeIndex, duration, numberOfElements])
 
     useGSAP(() => {
       if (buttonRef.current) {

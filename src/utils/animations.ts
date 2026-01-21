@@ -1,3 +1,5 @@
+import { exhaustiveCheck } from "./type-checkers"
+
 type Direction = "backward" | "forward" | "noop"
 
 interface GetDirectionParams {
@@ -11,7 +13,7 @@ type GetDirection = (params: GetDirectionParams) => {
   steps: number
 }
 
-export const getDirection: GetDirection = ({ prevIndex, newIndex, length }) => {
+const getDirection: GetDirection = ({ prevIndex, newIndex, length }) => {
   if (prevIndex === newIndex) {
     return {
       direction: "noop",
@@ -42,6 +44,37 @@ export const getDirection: GetDirection = ({ prevIndex, newIndex, length }) => {
   }
 }
 
+function finalPosition({
+  start,
+  prevActiveIndex,
+  activeIndex,
+  numberOfElements,
+}: {
+  start: number
+  prevActiveIndex: number
+  activeIndex: number
+  numberOfElements: number
+}) {
+  const { steps, direction } = getDirection({
+    prevIndex: prevActiveIndex,
+    newIndex: activeIndex,
+    length: numberOfElements,
+  })
+
+  if (direction === "forward") {
+    return start - steps / numberOfElements + 1
+  }
+  if (direction === "backward") {
+    return start + steps / numberOfElements - 1
+  }
+
+  if (direction === "noop") {
+    return start
+  }
+
+  return exhaustiveCheck(direction)
+}
+
 export function buttonWithAnimationCoords({
   index,
   activeIndex,
@@ -56,23 +89,13 @@ export function buttonWithAnimationCoords({
   const BUTTON_SIZE = 55
   const CIRCLE_OFFSET = -0.125
 
-  const { steps, direction } = getDirection({
-    prevIndex: prevActiveIndex,
-    newIndex: activeIndex,
-    length: numberOfElements,
-  })
   const start = (index - prevActiveIndex) / numberOfElements + CIRCLE_OFFSET
-  let end
-  if (direction === "forward") {
-    end = start - steps / numberOfElements + 1
-  }
-  if (direction === "backward") {
-    end = start + steps / numberOfElements - 1
-  }
-
-  if (direction === "noop") {
-    end = start
-  }
+  const end = finalPosition({
+    start,
+    prevActiveIndex,
+    activeIndex,
+    numberOfElements,
+  })
 
   const offsetX = -(BUTTON_SIZE / 2) - BUTTON_SIZE * index - 0.5
   const offsetY = -(BUTTON_SIZE / 2) - 0.5
