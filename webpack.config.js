@@ -18,6 +18,11 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
+      templateParameters: {
+        ptsansRegular: "assets/PTSans-Regular.ttf",
+        ptsansBold: "assets/PTSans-Bold.ttf",
+        bebasNeue: "assets/BebasNeue-Regular.ttf",
+      },
     }),
     new ProvidePlugin({
       React: "react",
