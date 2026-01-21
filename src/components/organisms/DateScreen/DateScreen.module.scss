@@ -36,7 +36,9 @@
     }
   }
   @media (min-width: $lg) {
-    height: 120px;
+    &::before {
+      height: 120px;
+    }
   }
 }
 
