@@ -35,6 +35,7 @@ function withAnimation(
     const [prevActiveIndex, setPrevActiveIndex] = useState(activeIndex)
     const buttonRef = useRef<HTMLButtonElement>(null)
     const contextRef = useRef<HTMLDivElement>(null)
+    const isFirstRender = prevActiveIndex == activeIndex
 
     const { contextSafe } = useGSAP(
       () => {
@@ -62,17 +63,6 @@ function withAnimation(
               setPrevActiveIndex(newValue)
             },
           })
-
-          if (isActive) {
-            gsap.to(buttonRef.current, {
-              ...activeStyles,
-              duration: 0,
-            })
-          } else {
-            gsap.to(buttonRef.current, {
-              ...initialStyles,
-            })
-          }
         }
       },
       {
@@ -80,6 +70,22 @@ function withAnimation(
         dependencies: [isActive, index, prevActiveIndex, activeIndex, duration],
       },
     )
+
+    useGSAP(() => {
+      if (buttonRef.current) {
+        if (isActive) {
+          gsap.to(buttonRef.current, {
+            ...activeStyles,
+            duration: 0,
+          })
+        } else {
+          gsap.to(buttonRef.current, {
+            ...initialStyles,
+            duration: isFirstRender ? 0 : duration / 2,
+          })
+        }
+      }
+    }, [isActive, isFirstRender])
 
     const onMouseEnter = contextSafe(() => {
       if (buttonRef.current) {
