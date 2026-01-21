@@ -1,26 +1,10 @@
 import clsx from "clsx"
-import { FC, useEffect, useState } from "react"
-import Swiper from "swiper"
-import { useSwiper } from "swiper/react"
+import { FC } from "react"
 import styles from "./SwiperMask.module.scss"
+import { useSwiperNavigation } from "@/utils/swiper"
 
 const SwiperMask: FC = () => {
-  const swiper = useSwiper()
-  const [isBeginning, setIsBeginning] = useState(swiper.isBeginning)
-  const [isEnd, setIsEnd] = useState(swiper.isEnd)
-
-  useEffect(() => {
-    const onSlideChange = (swiperInstance: Swiper) => {
-      setIsBeginning(swiperInstance.isBeginning)
-      setIsEnd(swiperInstance.isEnd)
-    }
-    if (swiper) {
-      swiper.on("slideChange", onSlideChange)
-    }
-    return () => {
-      swiper.off("slideChange", onSlideChange)
-    }
-  }, [swiper])
+  const { isBeginning, isEnd } = useSwiperNavigation()
 
   return (
     <div

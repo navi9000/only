@@ -1,22 +1,40 @@
 import clsx from "clsx"
-import type { FC } from "react"
-import { useSwiper } from "swiper/react"
+import { type FC } from "react"
 import styles from "./SwiperNavigation.module.scss"
 import Button from "@/components/atoms/Button/Button"
 import arrowIcon from "@/assets/forward_arrow_cards.svg"
+import { useSwiperNavigation } from "@/utils/swiper"
 
 const SwiperNavigation: FC<{ className?: string }> = ({ className }) => {
-  const swiper = useSwiper()
+  const { isBeginning, isEnd, slidePrev, slideNext } = useSwiperNavigation()
 
   return (
-    <div className={clsx(styles.navigation, className)}>
-      <Button variant="icon" onClick={() => swiper.slidePrev()}>
+    <>
+      <Button
+        className={clsx(
+          styles.navigationbutton,
+          styles.navigationbutton_backward,
+          { [styles.navigationbutton_hidden]: isBeginning },
+        )}
+        variant="icon"
+        onClick={slidePrev}
+      >
         <img src={arrowIcon} alt="back" />
       </Button>
-      <Button variant="icon" onClick={() => swiper.slideNext()}>
+      <Button
+        className={clsx(
+          styles.navigationbutton,
+          styles.navigationbutton_forward,
+          {
+            [styles.navigationbutton_hidden]: isEnd,
+          },
+        )}
+        variant="icon"
+        onClick={slideNext}
+      >
         <img src={arrowIcon} alt="back" />
       </Button>
-    </div>
+    </>
   )
 }
 

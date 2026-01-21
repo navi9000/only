@@ -1,4 +1,4 @@
-import { useRef, type FC } from "react"
+import { lazy, useRef, type FC } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 import Card from "@/components/molecules/Card/Card"
 import styles from "./CardList.module.scss"
@@ -11,7 +11,12 @@ import Divider from "@/components/atoms/Divider/Divider"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 import type { Resolve } from "@/utils/types"
-import SwiperMask from "@/components/molecules/SwiperMask/SwiperMask"
+const SwiperMask = lazy(
+  () => import("@/components/molecules/SwiperMask/SwiperMask"),
+)
+const SwiperNavigation = lazy(
+  () => import("@/components/molecules/SwiperNavigation/SwiperNavigation"),
+)
 
 type Props = {
   className?: string
@@ -50,7 +55,9 @@ const CardList: FC<Resolve<Props>> = ({ className }) => {
             },
             [1440]: {
               slidesPerView: 3,
-              spaceBetween: 40,
+              spaceBetween: 80,
+              slidesOffsetBefore: 80,
+              slidesOffsetAfter: 80,
             },
           }}
           modules={[Navigation, Pagination]}
@@ -61,8 +68,7 @@ const CardList: FC<Resolve<Props>> = ({ className }) => {
             </SwiperSlide>
           ))}
           {!isLargeScreen && <SwiperMask />}
-
-          {/* {isLargeScreen && <SwiperNavigation />} */}
+          {isLargeScreen && <SwiperNavigation className={styles.navigation} />}
         </Swiper>
       </div>
     </div>

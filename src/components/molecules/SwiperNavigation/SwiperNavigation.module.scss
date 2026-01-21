@@ -1,0 +1,23 @@
+.navigation {
+  display: flex;
+}
+
+.navigationbutton {
+  transition: opacity 300ms;
+  z-index: 1;
+  position: absolute;
+  top: 26px;
+  &_backward {
+    scale: -1 1;
+    left: 24px;
+  }
+
+  &_forward {
+    right: 24px;
+  }
+
+  &_hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
