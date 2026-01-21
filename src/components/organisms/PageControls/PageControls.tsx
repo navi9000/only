@@ -59,7 +59,7 @@ const PageControls: FC<Resolve<Props>> = ({ className }) => {
       {isLargeScreen && (
         <CircleShape ref={shapeRef} className={styles.circle} />
       )}
-      <div className={styles.buttons}>
+      <div className={styles.buttons} key={isLargeScreen.toString()}>
         {Array.from({ length }, (_, index) => (
           <PageSelectorButton
             key={index}
