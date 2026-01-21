@@ -42,34 +42,45 @@ export const getDirection: GetDirection = ({ prevIndex, newIndex, length }) => {
   }
 }
 
-export function getStartAndEnd(
-  index: number,
-  currIndex: number,
-  prevIndex: number,
-  numOfElements: number,
-) {
-  const { steps, direction } = getDirection({
-    prevIndex,
-    newIndex: currIndex,
-    length: numOfElements,
-  })
+export function buttonWithAnimationCoords({
+  index,
+  activeIndex,
+  prevActiveIndex,
+  numberOfElements,
+}: {
+  index: number
+  activeIndex: number
+  prevActiveIndex: number
+  numberOfElements: number
+}) {
+  const BUTTON_SIZE = 55
+  const CIRCLE_OFFSET = -0.125
 
-  const start = (index - prevIndex) / numOfElements - 0.125
+  const { steps, direction } = getDirection({
+    prevIndex: prevActiveIndex,
+    newIndex: activeIndex,
+    length: numberOfElements,
+  })
+  const start = (index - prevActiveIndex) / numberOfElements + CIRCLE_OFFSET
   let end
   if (direction === "forward") {
-    end = start - steps / numOfElements + 1
+    end = start - steps / numberOfElements + 1
   }
   if (direction === "backward") {
-    end = start + steps / numOfElements - 1
+    end = start + steps / numberOfElements - 1
   }
 
   if (direction === "noop") {
     end = start
   }
 
+  const offsetX = -(BUTTON_SIZE / 2) - BUTTON_SIZE * index - 0.5
+  const offsetY = -(BUTTON_SIZE / 2) - 0.5
+
   return {
     start,
     end,
-    newValue: currIndex,
+    offsetX,
+    offsetY,
   }
 }

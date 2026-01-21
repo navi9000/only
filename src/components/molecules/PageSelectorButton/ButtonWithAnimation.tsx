@@ -2,7 +2,7 @@ import Button from "@/components/atoms/Button/Button"
 import { useRef, useState, type ComponentProps, type FC } from "react"
 import { PageSelectorButtonProps } from "./utils"
 import { useGSAP } from "@gsap/react"
-import { getStartAndEnd } from "@/utils/animations"
+import { buttonWithAnimationCoords } from "@/utils/animations"
 import gsap from "gsap"
 import { MotionPathPlugin } from "gsap/all"
 
@@ -43,31 +43,34 @@ function withAnimation(
           const path = MotionPathPlugin.convertToPath(
             shapeRef.current.firstChild,
           )[0]
-          const { start, end, newValue } = getStartAndEnd(
+          const coords = buttonWithAnimationCoords({
             index,
-            activeIndex,
             prevActiveIndex,
+            activeIndex,
             numberOfElements,
-          )
+          })
 
           gsap.to(buttonRef.current, {
             duration,
             motionPath: {
               path,
-              offsetX: -55 / 2 + -55 * index - 0.5,
-              offsetY: -55 / 2 - 0.5,
-              start,
-              end,
+              ...coords,
             },
             onComplete: () => {
-              setPrevActiveIndex(newValue)
+              setPrevActiveIndex(activeIndex)
             },
           })
         }
       },
       {
         scope: contextRef,
-        dependencies: [isActive, index, prevActiveIndex, activeIndex, duration],
+        dependencies: [
+          index,
+          prevActiveIndex,
+          activeIndex,
+          duration,
+          numberOfElements,
+        ],
       },
     )
 
