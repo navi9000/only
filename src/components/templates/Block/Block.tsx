@@ -8,9 +8,11 @@ import BlockContextProvider from "./BlockContextProvider"
 const Block: FC<BlockData> = ({ data }) => {
   return (
     <BlockContextProvider data={{ data }}>
-      <section className={styles.block}>
-        <DateScreen />
-        <CardList className={styles.cardlist} />
+      <section className={styles.blockcontainer}>
+        <div className={styles.block}>
+          <DateScreen />
+          <CardList className={styles.cardlist} />
+        </div>
       </section>
     </BlockContextProvider>
   )
