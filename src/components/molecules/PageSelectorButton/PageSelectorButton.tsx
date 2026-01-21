@@ -1,35 +1,12 @@
 import Button from "@/components/atoms/Button/Button"
 import { Resolve } from "@/utils/types"
 import { useIsLargeScreen } from "@/utils/viewport"
-import { useRef, type ComponentProps, type FC, useState } from "react"
-import gsap from "gsap"
-import { ReactRef, useGSAP } from "@gsap/react"
-import { MotionPathPlugin } from "gsap/all"
-import { getStartAndEnd } from "@/utils/animations"
+import { lazy, type FC } from "react"
+import { PageSelectorButtonProps } from "./utils"
 
-type Props = {
-  index: number
-  numberOfElements: number
-  activeIndex: number
-  duration: number
-  shapeRef?: ReactRef
-} & ComponentProps<"button">
+const ButtonWithAnimation = lazy(() => import("./ButtonWithAnimation"))
 
-const initialStyles: GSAPTweenVars = {
-  backgroundColor: "var(--color-primary)",
-  borderColor: "transparent",
-  scale: 1 / 7,
-}
-
-const activeStyles: GSAPTweenVars = {
-  backgroundColor: "white",
-  borderColor: "var(--color-primary)",
-  scale: 1,
-}
-
-gsap.registerPlugin(MotionPathPlugin)
-
-const PageSelectorButton: FC<Resolve<Props>> = ({
+const PageSelectorButton: FC<Resolve<PageSelectorButtonProps>> = ({
   activeIndex,
   index,
   shapeRef,
@@ -37,99 +14,23 @@ const PageSelectorButton: FC<Resolve<Props>> = ({
   duration,
   ...rest
 }) => {
-  const isActive = activeIndex === index
-  const [prevActiveIndex, setPrevActiveIndex] = useState(activeIndex)
-  const buttonRef = useRef<HTMLButtonElement>(null)
   const isLargeScreen = useIsLargeScreen()
-  const { contextSafe } = useGSAP(
-    () => {
-      if (!isLargeScreen && buttonRef.current) {
-        gsap.to(buttonRef.current, {
-          ...initialStyles,
-          scale: 1,
-          duration: 0,
-        })
-      }
-      if (isLargeScreen && buttonRef.current) {
-        const { start, end, newValue } = getStartAndEnd(
-          index,
-          activeIndex,
-          prevActiveIndex,
-          numberOfElements,
-        )
 
-        if (shapeRef.current) {
-          gsap.to(buttonRef.current, {
-            duration,
-            motionPath: {
-              path: MotionPathPlugin.convertToPath(
-                shapeRef.current.firstChild,
-              )[0],
-              offsetX: -55 / 2 + -55 * index - 0.5,
-              offsetY: -55 / 2 - 0.5,
-              start,
-              end,
-            },
-            onComplete: () => {
-              setPrevActiveIndex(newValue)
-            },
-          })
-        }
-
-        if (isActive) {
-          gsap.to(buttonRef.current, {
-            ...activeStyles,
-            duration: 0,
-          })
-        } else {
-          gsap.to(buttonRef.current, {
-            ...initialStyles,
-          })
-        }
-      }
-    },
-    {
-      scope: shapeRef,
-      dependencies: [
-        isActive,
-        index,
-        isLargeScreen,
-        prevActiveIndex,
-        activeIndex,
-        duration,
-      ],
-    },
-  )
-
-  const onMouseEnter = contextSafe(() => {
-    if (buttonRef.current && isLargeScreen) {
-      gsap.to(buttonRef.current, {
-        ...activeStyles,
-        ease: "power2.out",
-      })
-    }
-  })
-
-  const onMouseLeave = contextSafe(() => {
-    if (buttonRef.current && isLargeScreen && !isActive) {
-      gsap.to(buttonRef.current, {
-        ...initialStyles,
-        ease: "power2.out",
-      })
-    }
-  })
+  if (!isLargeScreen) {
+    return <Button variant="bullet" active={activeIndex === index} {...rest} />
+  }
 
   return (
-    <Button
-      ref={buttonRef}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      variant="bullet"
-      active={isActive}
+    <ButtonWithAnimation
+      shapeRef={shapeRef}
+      duration={duration}
+      activeIndex={activeIndex}
+      index={index}
+      numberOfElements={numberOfElements}
       {...rest}
     >
       {index + 1}
-    </Button>
+    </ButtonWithAnimation>
   )
 }
 
