@@ -24,27 +24,25 @@ type Props = {
 
 const CardList: FC<Resolve<Props>> = ({ className }) => {
   const isLargeScreen = useIsLargeScreen()
-  const { list, isLoading } = useCardList()
+  const { list, isLoading, selectedPage } = useCardList()
   const ref = useRef<HTMLDivElement>(null)
 
-  useGSAP(
-    () => {
-      if (isLargeScreen === false && ref.current && isLoading) {
-        gsap.from(ref.current, {
-          opacity: 0,
-          y: 20,
-          duration: 1,
-        })
-      }
-    },
-    { dependencies: [isLargeScreen, isLoading] },
-  )
+  useGSAP(() => {
+    if (isLargeScreen === false && ref.current && isLoading) {
+      gsap.from(ref.current, {
+        opacity: 0,
+        y: 20,
+        duration: 1,
+      })
+    }
+  }, [isLargeScreen, isLoading])
 
   return (
     <div className={clsx(styles.cardlist, className)} ref={ref}>
       {isLargeScreen === false && <Divider className={styles.divider} />}
       <div>
         <Swiper
+          key={selectedPage}
           className={styles.swiper}
           breakpoints={{
             [320]: {

@@ -5,5 +5,6 @@ export default function useCardList() {
   return {
     list: blockData.data[selectedPage].list,
     isLoading,
+    selectedPage,
   }
 }
