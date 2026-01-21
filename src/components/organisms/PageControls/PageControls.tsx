@@ -26,6 +26,7 @@ const PageControls: FC<Resolve<Props>> = ({ className }) => {
     setPrev,
     setNext,
     isLoading,
+    duration,
   } = usePageControls()
   const isLargeScreen = useIsLargeScreen()
   const shapeRef = useRef<SVGSVGElement>(null)
@@ -67,6 +68,7 @@ const PageControls: FC<Resolve<Props>> = ({ className }) => {
             activeIndex={activeIndex}
             onClick={() => setActive(index)}
             shapeRef={shapeRef}
+            duration={duration}
           />
         ))}
       </div>

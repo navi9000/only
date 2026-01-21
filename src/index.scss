@@ -9,6 +9,7 @@
   --color-blue: #3877ee;
   --color-pink: #f178b6;
   --color-divider: #c7cdd9;
+  --color-backgound: #ffffff;
   --font-primary: "PT Sans", sans-serif;
   --font-secondary: "Bebas Neue", sans-serif;
 }
@@ -34,4 +35,5 @@
 body {
   font-family: "PT Sans", sans-serif;
   min-width: 320px;
+  background-color: var(--color-backgound);
 }

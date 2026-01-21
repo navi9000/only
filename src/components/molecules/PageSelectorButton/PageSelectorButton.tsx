@@ -11,6 +11,7 @@ type Props = {
   index: number
   numberOfElements: number
   activeIndex: number
+  duration: number
   shapeRef?: ReactRef
 } & ComponentProps<"button">
 
@@ -33,6 +34,7 @@ const PageSelectorButton: FC<Resolve<Props>> = ({
   index,
   shapeRef,
   numberOfElements,
+  duration,
   ...rest
 }) => {
   const isActive = activeIndex === index
@@ -57,7 +59,7 @@ const PageSelectorButton: FC<Resolve<Props>> = ({
 
         if (shapeRef.current) {
           gsap.to(buttonRef.current, {
-            duration: 1,
+            duration,
             motionPath: {
               path: MotionPathPlugin.convertToPath(
                 shapeRef.current.firstChild,
@@ -93,6 +95,7 @@ const PageSelectorButton: FC<Resolve<Props>> = ({
         isLargeScreen,
         prevActiveIndex,
         activeIndex,
+        duration,
       ],
     },
   )
