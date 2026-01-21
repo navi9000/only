@@ -35,9 +35,6 @@ module.exports = {
     }),
   ],
   devServer: {
-    static: {
-      directory: path.join(__dirname, "public"),
-    },
     compress: true,
     port: 9000,
   },
@@ -47,19 +44,11 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: "asset/resource",
         exclude: /node_modules/,
-        // generator: {
-        //   outputPath: "assets/img/",
-        //   filename: "[name][ext]",
-        // },
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: "asset/resource",
         exclude: /node_modules/,
-        // generator: {
-        //   outputPath: "assets/fonts/",
-        //   filename: "[name][ext]",
-        // },
       },
       {
         test: /\.tsx?$/,

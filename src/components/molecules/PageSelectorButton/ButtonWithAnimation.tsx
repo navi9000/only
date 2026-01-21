@@ -102,7 +102,7 @@ function withAnimation(
     })
 
     return (
-      <div ref={contextRef}>
+      <div ref={contextRef} style={isActive ? { pointerEvents: "none" } : {}}>
         <WrappedComponent
           ref={buttonRef}
           onMouseEnter={onMouseEnter}
